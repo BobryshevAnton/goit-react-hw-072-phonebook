@@ -7,13 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from './redux/operations';
 import { selectContacts } from './redux/selectors';
 
-import Notiflix from 'notiflix';
 import css from './app.module.css';
-// success ;
-//  failure ;
-//  warning ;
-//  info;
-//
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,8 +18,8 @@ const App = () => {
   }, [dispatch]);
   return (
     <div className={css.form}>
-      {isLoading && Notiflix.Notify.success('Loading contact list...')}
-      {error && Notiflix.Notify.success({ error })}
+      {isLoading && <p> 'Loading contact list...'</p>}
+      {error && <p> {error}</p>}
 
       <ContactForm />
       <Filter />
