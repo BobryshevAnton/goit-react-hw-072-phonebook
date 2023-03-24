@@ -1,15 +1,15 @@
 import css from './contactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'components/redux/operations';
-import { getContacts } from 'components/redux/selectors';
-import { getFilter } from 'components/redux/selectors';
+import { selectContacts, selectFilter } from 'components/redux/selectors';
+
 //
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
+  const filter = useSelector(selectFilter);
 
-  const { items } = useSelector(getContacts);
+  const { items } = useSelector(selectContacts);
 
   let filterContact = items.filter(elem =>
     elem.name.toLowerCase().includes(filter.filter)

@@ -5,10 +5,9 @@ import { Filter } from './Filter/Filter';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from './redux/operations';
-import { getContacts } from './redux/selectors';
+import { selectContacts } from './redux/selectors';
 
 import Notiflix from 'notiflix';
-
 import css from './app.module.css';
 // success ;
 //  failure ;
@@ -18,22 +17,19 @@ import css from './app.module.css';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { items, isLoading, error } = useSelector(getContacts);
+  const { isLoading, error } = useSelector(selectContacts);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
   return (
     <div className={css.form}>
-      {isLoading &&
-        Notiflix.Notify.success('Loading contact list...', {
-          timeout: 500,
-        })}
+      {isLoading && Notiflix.Notify.success('Loading contact list...')}
       {error && Notiflix.Notify.success({ error })}
 
       <ContactForm />
       <Filter />
-      {items && <ContactList />}
+      <ContactList />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'components/redux/operations';
-import { getContacts } from 'components/redux/selectors';
+import { selectContacts } from 'components/redux/selectors';
 
 import css from './contactForm.module.css';
 import { nanoid } from 'nanoid';
@@ -9,7 +9,7 @@ import { nanoid } from 'nanoid';
 export const ContactForm = () => {
   //
   const dispatch = useDispatch();
-  const items = useSelector(getContacts);
+  const items = useSelector(selectContacts);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -32,7 +32,7 @@ export const ContactForm = () => {
     evt.preventDefault();
     const newContact = {
       name: `${name}`,
-      createdAt: `${number}`,
+      phone: `${number}`,
     };
     const inclCont = items.items.some(item => item.name === name);
     if (inclCont) {
